@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace SoulDoit\SetEnv\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
