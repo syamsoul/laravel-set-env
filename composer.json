@@ -1,7 +1,7 @@
 {
     "name": "syamsoul/laravel-set-env",
     "description": "Easily update or insert Laravel environment variable with Artisan command",
-    "type": "composer-plugin",
+    "type": "laravel-package",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -17,5 +17,12 @@
     "require": {
         "illuminate/support": "^10.4",
         "illuminate/console": "^10.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SoulDoit\\SetEnv\\Providers\\SetEnvServiceProvider"
+            ]
+        }
     }
 }
