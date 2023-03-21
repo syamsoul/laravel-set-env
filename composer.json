@@ -1,0 +1,21 @@
+{
+    "name": "syamsoul/laravel-set-env",
+    "description": "Easily update or insert Laravel environment variable with Artisan command",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "SoulDoit\\SetEnv\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Syamsoul Azrien",
+            "email": "syamsoulazrien.miat@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^10.4",
+        "illuminate/console": "^10.4"
+    }
+}
