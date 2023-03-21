@@ -53,7 +53,7 @@ class SetEnvCommand extends Command
                 return;
             }
         }else{
-            $new_env_var_arr = explode("=", $new_env_var);
+            $new_env_var_arr = explode("=", $new_env_var, 2);
 
             if(count($new_env_var_arr) !== 2){
                 $this->components->error('Invalid argument format. Correct format should be {var}={value}.');
