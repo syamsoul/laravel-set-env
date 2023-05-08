@@ -13,7 +13,7 @@ class Env
         private string $env_file_path = ".env"
     )
     {
-        $this->env_file_content = File::get($env_file_path);
+        $this->loadEnvContent();
     }
 
     public function get(string $key): string
@@ -41,7 +41,14 @@ class Env
 
             File::append($this->env_file_path, $new_env_var_final);
         }
+
+        $this->loadEnvContent();
         
         return true;
+    }
+    
+    private function loadEnvContent()
+    {
+        $this->env_file_content = File::get($this->env_file_path);
     }
 }
