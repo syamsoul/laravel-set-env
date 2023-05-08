@@ -4,7 +4,7 @@ namespace SoulDoit\SetEnv\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
-use Illuminate\Support\Facades\File;
+use SoulDoit\SetEnv\Env;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 
@@ -32,6 +32,7 @@ class SetEnvCommand extends Command
     public function handle(): void
     {
         $env_file_path = $this->option('env_file_path');
+        $envService = new Env($env_file_path); 
 
         $new_env_var_arr = [];
 
@@ -65,27 +66,11 @@ class SetEnvCommand extends Command
             return trim(($key === 0 ? strtoupper($value) : $value));
         });
 
-        $new_env_var_arr[1] = "\"$new_env_var_arr[1]\"";
-
-        $new_env_var_final = implode("=", $new_env_var_arr);
-
         if(!$this->confirmToProceed()){
             return;
         }
 
-        $env_file = File::get($env_file_path);
-        
-        $is_already_exist = Str::of($env_file)->isMatch("/^$new_env_var_arr[0]=/m");
-        
-        if($is_already_exist){
-            $replaced_env = Str::of($env_file)->replaceMatches("/^$new_env_var_arr[0]=.*$/m", $new_env_var_final);
-            File::put($env_file_path, $replaced_env);
-        }else{
-            $is_last_env_have_newline = Str::of($env_file)->isMatch("/\n$/");
-            if(!$is_last_env_have_newline) $new_env_var_final = "\n$new_env_var_final";
-
-            File::append($env_file_path, $new_env_var_final);
-        }
+        $envService->set($new_env_var_arr[0], $new_env_var_arr[1]);
 
         $this->components->info('Success');
     }
