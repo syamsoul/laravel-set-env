@@ -1,5 +1,5 @@
 {
-    "name": "syamsoul/laravel-set-env",
+    "name": "snoopycodex/laravel-set-env-fork",
     "description": "Easily update or insert Laravel environment variable with Artisan command",
     "type": "laravel-package",
     "license": "MIT",
@@ -12,6 +12,10 @@
         {
             "name": "Syamsoul Azrien",
             "email": "syamsoulazrien.miat@gmail.com"
+        },
+        {
+            "name": "SnoopyCodeX",
+            "email": "extremeclasherph@gmail.com"
         }
     ],
     "require": {
