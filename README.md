@@ -65,6 +65,12 @@ or you can set/update the environment variable via `Artisan` command.
 php artisan souldoit:set-env
 ```
 
+or
+
+``` bash
+php artisan souldoit:set-env "MY_APP_NAME=My Laravel Application"
+```
+
 &nbsp;
 ### Get Variable's Value
 
