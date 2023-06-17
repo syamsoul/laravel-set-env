@@ -28,7 +28,10 @@ class Env
 
     public function set(string $key, string $value): bool
     {
-        $new_env_var_final = "$key=\"$value\"";
+        if(str_contains($value, " "))
+            $value = "\"$value\"";
+        
+        $new_env_var_final = "$key=$value";
         
         $is_already_exist = Str::of($this->env_file_content)->isMatch("/^$key=/m");
         
