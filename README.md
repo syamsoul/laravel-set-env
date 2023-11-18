@@ -22,7 +22,7 @@ This package allows you to programmatically set environment variable into `.env`
 &nbsp;
 ## Requirement
 
-* Laravel 9.x (and above)
+* Laravel 10.x (and above)
 
 
 &nbsp;
@@ -56,6 +56,10 @@ To set/update environment variable in `.env` file, just simply use the `set` met
 ```php
 $envService = new Env(); 
 $envService->set("MY_APP_NAME", "My Laravel Application");
+
+// or set variable in .env.example file
+$envService = new Env('.env.example'); 
+$envService->set("MY_APP_NAME", "Localhost");
 ```
 
 &nbsp;
@@ -69,6 +73,12 @@ or
 
 ``` bash
 php artisan souldoit:set-env "MY_APP_NAME=My Laravel Application"
+```
+
+or, set variable in .env.example file
+
+``` bash
+php artisan souldoit:set-env "MY_APP_NAME=Localhost" -E=.env.example
 ```
 
 &nbsp;
