@@ -58,7 +58,7 @@ $envService = new Env();
 $envService->set("MY_APP_NAME", "My Laravel Application");
 
 // or set variable in .env.example file
-$envService = new Env('.env.example'); 
+$envService = new Env('.env.example');
 $envService->set("MY_APP_NAME", "Localhost");
 ```
 
@@ -78,7 +78,11 @@ php artisan souldoit:set-env "MY_APP_NAME=My Laravel Application"
 or, set variable in .env.example file
 
 ``` bash
-php artisan souldoit:set-env "MY_APP_NAME=Localhost" -E=.env.example
+php artisan souldoit:set-env "MY_APP_NAME=Localhost" -E .env.example
+
+#or
+
+php artisan souldoit:set-env "MY_APP_NAME=Localhost" --env_file_path=.env.example
 ```
 
 &nbsp;
