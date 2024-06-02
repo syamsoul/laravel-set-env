@@ -2,6 +2,17 @@
     "name": "syamsoul/laravel-set-env",
     "description": "Easily update or insert Laravel environment variable with Artisan command",
     "type": "laravel-package",
+    "keywords": [
+        "syamsoul",
+        "laravel",
+        "set",
+        "env",
+        "programatically",
+        "command",
+        "artisan",
+        "php",
+        "souldoit"
+    ],
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -15,6 +26,7 @@
         }
     ],
     "require": {
+        "php": ">=8.0.0",
         "illuminate/support": "^10.0|^11.0",
         "illuminate/console": "^10.0|^11.0"
     },
