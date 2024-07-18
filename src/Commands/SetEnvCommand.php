@@ -17,7 +17,7 @@ class SetEnvCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'souldoit:set-env {new_env_var?} {--E|env_file_path=.env}';
+    protected $signature = 'souldoit:set-env {new_env_var?} {--E|env_file_path=.env} {--force : Force running in production}';
 
     /**
      * The console command description.
