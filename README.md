@@ -82,7 +82,7 @@ php artisan souldoit:set-env "MY_APP_NAME=Localhost" -E .env.example
 
 #or
 
-php artisan souldoit:set-env "MY_APP_NAME=Localhost" --env_file_path=.env.example
+php artisan souldoit:set-env "MY_APP_NAME=Localhost" --env_file=.env.example
 ```
 
 &nbsp;
