@@ -10,7 +10,7 @@ class Env
     private $env_file_content = '';
 
     function __construct(
-        private string $env_file_path = ".env"
+        private string $env_file = ".env"
     )
     {
         $this->loadEnvContent();
@@ -34,12 +34,12 @@ class Env
         
         if ($is_already_exist) {
             $replaced_env = Str::of($this->env_file_content)->replaceMatches("/^$key=.*$/m", $new_env_var_final);
-            File::put(base_path($this->env_file_path), $replaced_env);
+            File::put(base_path($this->env_file), $replaced_env);
         } else {
             $is_last_env_have_newline = Str::of($this->env_file_content)->isMatch("/\n$/");
             if(!$is_last_env_have_newline) $new_env_var_final = "\n$new_env_var_final";
 
-            File::append(base_path($this->env_file_path), $new_env_var_final);
+            File::append(base_path($this->env_file), $new_env_var_final);
         }
 
         $this->loadEnvContent();
@@ -49,6 +49,6 @@ class Env
     
     private function loadEnvContent()
     {
-        $this->env_file_content = File::get(base_path($this->env_file_path));
+        $this->env_file_content = File::get(base_path($this->env_file));
     }
 }

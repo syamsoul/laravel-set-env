@@ -17,7 +17,7 @@ class SetEnvCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'souldoit:set-env {new_env_var?} {--E|env_file_path=.env}';
+    protected $signature = 'souldoit:set-env {new_env_var?} {--E|env_file=.env : Environment file} {--force : Force running in production}';
 
     /**
      * The console command description.
@@ -31,8 +31,8 @@ class SetEnvCommand extends Command
      */
     public function handle(): void
     {
-        $env_file_path = $this->option('env_file_path');
-        $envService = new Env($env_file_path); 
+        $env_file = $this->option('env_file');
+        $envService = new Env($env_file); 
 
         $new_env_var_arr = [];
 
