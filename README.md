@@ -85,6 +85,13 @@ php artisan souldoit:set-env "MY_APP_NAME=Localhost" -E .env.example
 php artisan souldoit:set-env "MY_APP_NAME=Localhost" --env_file=.env.example
 ```
 
+#### Force option in production
+
+- When using --force option, it will bypass confirmation prompts in production.
+``` bash
+php artisan souldoit:set-env "MY_APP_NAME=Production App" --force
+```
+
 &nbsp;
 ### Get Variable's Value
 
