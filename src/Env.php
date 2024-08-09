@@ -20,6 +20,8 @@ class Env
     {
         $value = Str::of($this->env_file_content)->match("/^$key=(.*)$/m");
 
+        $value = trim($value);
+        
         if (Str::of($value)->startsWith('"')) $value = Str::of($value)->substr(1);
         if (Str::of($value)->endsWith('"')) $value = Str::of($value)->substr(0, -1);
         
