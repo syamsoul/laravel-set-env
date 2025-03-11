@@ -4,6 +4,7 @@ namespace SoulDoit\SetEnv;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 
 class Env
 {
@@ -18,19 +19,24 @@ class Env
 
     public function get(string $key): string
     {
-        $value = Str::of($this->env_file_content)->match("/^$key=(.*)$/m");
-
-        $value = trim($value);
-        
-        if (Str::of($value)->startsWith('"')) $value = Str::of($value)->substr(1);
-        if (Str::of($value)->endsWith('"')) $value = Str::of($value)->substr(0, -1);
-        
-        return $value;
+        return Str::of($this->env_file_content)
+            ->match("/^$key=(.*)$/m")
+            ->trim()
+            ->when(
+                fn (Stringable $str) => $str->startsWith('"') && $str->endsWith('"'),
+                fn ($value) => Str::of($value)->substr(1, -1)
+            );
     }
 
-    public function set(string $key, string $value): bool
+    public function set(string $key, string|bool $value): bool
     {
-        $new_env_var_final = "$key=\"$value\"";
+        if (is_bool($value)) {
+            $value = $value ? 'true' : 'false';
+        } else if (! empty($value) && ! preg_match('/^[0-9A-Za-z]+$/', $value)) {
+            $value = "\"$value\"";
+        }
+
+        $new_env_var_final = "$key=$value";
         
         $is_already_exist = Str::of($this->env_file_content)->isMatch("/^$key=/m");
         
