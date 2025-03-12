@@ -42,9 +42,9 @@ composer require syamsoul/laravel-set-env
 &nbsp;
 ## Usage
 
-First, you must add this line to import `Env` service.
+First, you must use `Env` facade.
 ```php
-use SoulDoit\SetEnv\Env;
+use SoulDoit\SetEnv\Facades\Env;
 ```
 
 
@@ -54,12 +54,10 @@ use SoulDoit\SetEnv\Env;
 
 To set/update environment variable in `.env` file, just simply use the `set` method.
 ```php
-$envService = new Env(); 
-$envService->set("MY_APP_NAME", "My Laravel Application");
+Env::set("MY_APP_NAME", "My Laravel Application");
 
 // or set variable in .env.example file
-$envService = new Env('.env.example');
-$envService->set("MY_APP_NAME", "Localhost");
+Env::envFile('.env.example')->set("MY_APP_NAME", "Localhost");
 ```
 
 &nbsp;
@@ -97,8 +95,7 @@ php artisan souldoit:set-env "MY_APP_NAME=Production App" --force
 
 To get environment variable in `.env` file, just simply use the `get` method.
 ```php
-$envService = new Env(); 
-$the_value = $envService->get("MY_APP_NAME");
+$the_value = Env::get("MY_APP_NAME");
 // $the_value will return `My Laravel Application`
 ```
 
