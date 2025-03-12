@@ -4,7 +4,7 @@ namespace SoulDoit\SetEnv\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\ConfirmableTrait;
-use SoulDoit\SetEnv\Env;
+use SoulDoit\SetEnv\Facades\Env;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 
@@ -32,7 +32,7 @@ class SetEnvCommand extends Command
     public function handle(): void
     {
         $env_file = $this->option('env_file');
-        $envService = new Env($env_file); 
+        $envService = Env::envFile($env_file); 
 
         $new_env_var_arr = [];
 
