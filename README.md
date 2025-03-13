@@ -1,120 +1,136 @@
-# Env Variable Setter for Laravel
-
-
+# Laravel Environment Variable Setter
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/syamsoul/laravel-set-env.svg?style=flat-square)](https://packagist.org/packages/syamsoul/laravel-set-env)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Total Downloads](https://img.shields.io/packagist/dt/syamsoul/laravel-set-env.svg?style=flat-square)](https://packagist.org/packages/syamsoul/laravel-set-env)
+[![PHP Version](https://img.shields.io/packagist/php-v/syamsoul/laravel-set-env.svg?style=flat-square)](https://packagist.org/packages/syamsoul/laravel-set-env)
 
+A Laravel package that enables programmatic modification of environment variables in your `.env` file. Simple, secure, and efficient way to manage your Laravel application's environment configuration.
 
-&nbsp;
-## Introduction
+## ✨ Features
 
-This package allows you to programmatically set environment variable into `.env` file.
+- 🔐 Secure environment variable management
+- 🚀 Simple and intuitive API
+- 💻 Command-line interface support
+- 📝 Support for comments in .env files
+- 🎯 Precise variable positioning
+- 🔄 Multiple file support (.env, .env.example, etc.)
+- ⚡ Production-ready with safety checks
 
+## 📋 Table of Contents
 
-&nbsp;
-* [Requirement](#requirement)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Example](#example)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Basic Setup](#basic-setup)
+  - [Setting Environment Variables](#setting-environment-variables)
+  - [Getting Environment Variables](#getting-environment-variables)
+  - [Using Artisan Commands](#using-artisan-commands)
+- [Production Usage](#production-usage)
+- [Support](#support)
+- [License](#license)
 
+## 🔧 Requirements
 
-&nbsp;
-&nbsp;
-## Requirement
+- Laravel 10.x or higher
+- PHP 8.0 or higher
 
-* Laravel 10.x (and above)
+## 📦 Installation
 
+You can install the package via Composer:
 
-&nbsp;
-&nbsp;
-## Installation
-
-
-This package can be used in Laravel 9.x or higher. If you are using an older version of Laravel, there's might be some problem. If there's any problem, you can [create new issue](https://github.com/syamsoul/laravel-set-env/issues) and I will fix it as soon as possible.
-
-You can install the package via composer:
-
-``` bash
+```bash
 composer require syamsoul/laravel-set-env
 ```
 
-&nbsp;
-&nbsp;
-## Usage
+## 🚀 Usage
 
-First, you must use `Env` facade.
+### Basic Setup
+
+First, import the `Env` facade in your code:
+
 ```php
 use SoulDoit\SetEnv\Facades\Env;
 ```
 
+### Setting Environment Variables
 
-&nbsp;
-### Set New Variable or Update Existing Variable
+There are multiple ways to set or update environment variables:
 
+#### Using PHP Code
 
-To set/update environment variable in `.env` file, just simply use the `set` method.
+1. Basic usage:
 ```php
+// Set/update variable in .env file
 Env::set("MY_APP_NAME", "My Laravel Application");
 
-// or set variable in .env.example file
+// Set/update variable in .env.example file
 Env::envFile('.env.example')->set("MY_APP_NAME", "Localhost");
 ```
 
-&nbsp;
+2. Add comments:
+```php
+// Add a comment to explain the variable
+Env::set("ENABLE_CLOCKWORK", false, "Enable or disable the clockwork debugging tools");
+// Result in .env:
+// ENABLE_CLOCKWORK=false #Enable or disable the clockwork debugging tools
+```
 
-or you can set/update the environment variable via `Artisan` command.
-``` bash
+3. Control variable positioning:
+```php
+// Add/update a key after a specific key
+Env::set("ENABLE_CLOCKWORK", false, afterKey: "APP_NAME");
+// Result in .env:
+// APP_NAME=MyApp
+// ENABLE_CLOCKWORK=false
+```
+
+#### Using Artisan Commands
+
+1. Interactive mode:
+```bash
 php artisan souldoit:set-env
 ```
 
-or
-
-``` bash
+2. Direct mode:
+```bash
 php artisan souldoit:set-env "MY_APP_NAME=My Laravel Application"
 ```
 
-or, set variable in .env.example file
-
-``` bash
+3. Specify target env file:
+```bash
 php artisan souldoit:set-env "MY_APP_NAME=Localhost" -E .env.example
-
-#or
-
+# or
 php artisan souldoit:set-env "MY_APP_NAME=Localhost" --env_file=.env.example
 ```
 
-#### Force option in production
+### Getting Environment Variables
 
-- When using --force option, it will bypass confirmation prompts in production.
-``` bash
+Retrieve environment variable values using the `get` method:
+
+```php
+$value = Env::get("MY_APP_NAME");
+```
+
+## 🛡️ Production Usage
+
+When working in a production environment, you can use the `--force` flag to bypass confirmation prompts:
+
+```bash
 php artisan souldoit:set-env "MY_APP_NAME=Production App" --force
 ```
 
-&nbsp;
-### Get Variable's Value
+## ❤️ Support
 
-To get environment variable in `.env` file, just simply use the `get` method.
-```php
-$the_value = Env::get("MY_APP_NAME");
-// $the_value will return `My Laravel Application`
-```
+If you find this package helpful, consider supporting the development:
 
-
-&nbsp;
-&nbsp;
-## Support me
-
-If you find this package helps you, kindly support me by donating some BNB (BSC) to the address below.
-
+BNB (BSC) Donation Address:
 ```
 0x364d8eA5E7a4ce97e89f7b2cb7198d6d5DFe0aCe
 ```
 
-<img src="https://info.souldoit.com/img/wallet-address-bnb-bsc.png" width="150">
+<img src="https://info.souldoit.com/img/wallet-address-bnb-bsc.png" width="150" alt="BNB Wallet QR Code">
 
+## 📄 License
 
-&nbsp;
-&nbsp;
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE) for more information.
+This package is open-sourced software licensed under the [MIT License](LICENSE).
