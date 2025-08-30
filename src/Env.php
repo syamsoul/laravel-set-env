@@ -3,12 +3,13 @@
 namespace SoulDoit\SetEnv;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\HigherOrderWhenProxy;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 
 class Env
 {
-    private $env_file_content = '';
+    private string $env_file_content = '';
 
     function __construct(
         private string $env_file = ".env"
@@ -22,7 +23,7 @@ class Env
         return new self($env_file);
     }
 
-    public function get(string $key): string
+    public function get(string $key): Stringable|HigherOrderWhenProxy
     {
         return Str::of($this->env_file_content)
             ->match("/^$key=(.*)$/m")
@@ -100,7 +101,7 @@ class Env
         return true;
     }
     
-    private function loadEnvContent()
+    private function loadEnvContent(): void
     {
         $this->env_file_content = File::get(base_path($this->env_file));
     }
